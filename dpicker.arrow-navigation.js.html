@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: dpicker.arrow-navigation.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: dpicker.arrow-navigation.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>'use strict'
+function positionInParent(children) {
+  return [].findIndex.call(children.parentNode.children, (c) => c === children)
+}
+
+/**
+ * @module DPicker.modules.arrowNavigation
+ */
+
+function left(td, table) {
+  //previous td
+  let previous = td.previousElementSibling
+
+  if (previous &amp;&amp; previous.querySelector('button')) {
+    return previous.querySelector('button').focus()
+  }
+
+  //previous row, last button
+  previous = td.parentNode.previousElementSibling
+  previous = previous ? previous.querySelector('td:last-child button') : null
+
+  if (previous) {
+    return previous.focus()
+  }
+
+  //last tr first td
+  let last = table.querySelector('tr:last-child').querySelectorAll('td.dpicker-active')
+  return last[last.length - 1].querySelector('button').focus()
+}
+
+function right(td, table) {
+  let next = td.nextElementSibling
+
+  if (next &amp;&amp; next.querySelector('button')) {
+    return next.querySelector('button').focus()
+  }
+
+  next = td.parentNode.nextElementSibling
+  next = next ? next.querySelector('td:first-child button') : null
+
+  if (next) {
+    return next.focus()
+  }
+
+  return table.querySelector('tr:first-child').nextElementSibling.querySelectorAll('td.dpicker-active')[0].querySelector('button').focus()
+
+}
+
+function upOrDown(td, table, direction) {
+  let position = positionInParent(td)
+  let sibling = (direction === 'up' ? 'previous' : 'next')+'ElementSibling'
+  //previous line (tr), element (td) at the same position
+  let previousOrNext = td.parentNode[sibling]
+  previousOrNext = previousOrNext ? previousOrNext.children[position] : null
+
+  if (previousOrNext &amp;&amp; previousOrNext.classList.contains('dpicker-active')) {
+    return previousOrNext.querySelector('button').focus()
+  }
+
+  //last or first line
+  let lastOrFirst = table.querySelector('tr:' + (direction === 'up' ? 'last-child' : 'first-child'))
+
+  //find the last available position with a button beggining by the bottom
+  while(lastOrFirst) {
+    if (lastOrFirst.children[position].classList.contains('dpicker-active')) {
+      return lastOrFirst.children[position].querySelector('button').focus()
+    }
+
+    lastOrFirst = lastOrFirst[sibling]
+  }
+}
+
+function up(td, table) {
+  return upOrDown(td, table, 'up')
+}
+
+function down(td, table) {
+  return upOrDown(td, table, 'down')
+}
+
+/**
+ * Enables arrow navigation inside days
+ * @param {Event} DOMEvent
+ * @listens DPicker#dayKeyDown
+ */
+function DayKeyDown(evt) {
+  let key = evt.which || evt.keyCode
+  if (key > 40 || key &lt; 37) {
+    return
+  }
+
+  evt.preventDefault()
+
+  let td = evt.target.parentNode
+  let table = td.parentNode.parentNode
+
+  switch (key) {
+    //left
+    case 37: {
+      return left(td, table)
+    }
+    //right
+    case 39: {
+      return right(td, table)
+    }
+    //up
+    case 38: {
+      return up(td, table)
+    }
+    //down
+    case 40: {
+      return down(td, table)
+    }
+  }
+}
+
+if (!DPicker) {
+  throw new ReferenceError('DPicker is required for this extension to work')
+}
+
+const arrowNavigation = DPicker.modules.arrowNavigation = {
+  dayKeyDown: DayKeyDown
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="DPicker.modules.module_arrowNavigation.html">arrowNavigation</a></li><li><a href="DPicker.modules.module_modifiers.html">modifiers</a></li></ul><h3>Classes</h3><ul><li><a href="DPicker.html">DPicker</a></li></ul><h3>Events</h3><ul><li><a href="DPicker.html#event:dayClick">dayClick</a></li><li><a href="DPicker.html#event:dayKeyDown">dayKeyDown</a></li><li><a href="DPicker.html#event:hide">hide</a></li><li><a href="DPicker.html#event:inputBlur">inputBlur</a></li><li><a href="DPicker.html#event:inputChange">inputChange</a></li><li><a href="DPicker.html#event:inputFocus">inputFocus</a></li><li><a href="DPicker.html#event:keyDown">keyDown</a></li><li><a href="DPicker.html#event:monthChange">monthChange</a></li><li><a href="DPicker.html#event:yearChange">yearChange</a></li></ul><h3>Global</h3><ul><li><a href="global.html#injector">injector</a></li><li><a href="global.html#isElementInContainer">isElementInContainer</a></li><li><a href="global.html#uuid">uuid</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Sat Jul 16 2016 11:22:40 GMT+0200 (CEST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <meta name="viewport" content="width=device-width" />
+    <title>DPicker styles</title>
+    <style>
+      h1, h2, h3, h4, h5, h6 {
+        font-family: Helvetica Neue,Helvetica,Roboto,Arial,sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        color: inherit;
+        text-rendering: optimizeLegibility;
+        margin-top: 0;
+        margin-bottom: .5rem;
+        line-height: 1.4;
+      }
+      .style {
+        width: 80%;
+        margin: 10px auto;
+        border: 1px solid lightgray;
+        padding: 20px;
+      }
+    </style>
+      <style type='text/css'>#default td.dpicker-inactive {
+  color: grey; }
+
+#default button.dpicker-active {
+  background: coral; }
+
+#default .dpicker-invisible {
+  display: none; }
+
+#default .dpicker-visible {
+  display: block; }
+</style>
+      <style type='text/css'>#jonwilkinson .dpicker-container table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 3px;
+  -webkit-box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.5); }
+
+#jonwilkinson .dpicker-container button,
+#jonwilkinson .dpicker-container td,
+#jonwilkinson .dpicker-container th {
+  font-size: 1em;
+  /* overall calendar size */
+  height: 2em;
+  /* tweak to add vertical spacing to calendar */
+  min-width: 1em;
+  /* tweak to add horizontal spacing to calendar */
+  text-align: center; }
+
+#jonwilkinson .dpicker-inactive {
+  color: rgba(0, 0, 0, 0.2); }
+
+#jonwilkinson select[name=&quot;dpicker-year&quot;], #jonwilkinson select[name=&quot;dpicker-month&quot;] {
+  margin: 1em 2em 1em 0em; }
+
+#jonwilkinson .dpicker-active button.dpicker-active {
+  background-color: #FFFBCC;
+  font-weight: bold; }
+
+#jonwilkinson .dpicker-container, #jonwilkinson .dpicker-container button {
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+#jonwilkinson .dpicker-container {
+  margin: .5em; }
+
+#jonwilkinson .dpicker-active, #jonwilkinson .dpicker-inactive {
+  border: 1px solid rgba(0, 0, 0, 0.05); }
+
+#jonwilkinson .dpicker-active button {
+  border: none;
+  width: 100%;
+  background: none; }
+
+#jonwilkinson .dpicker-active button:hover {
+  background: rgba(0, 0, 0, 0.05);
+  cursor: pointer; }
+
+#jonwilkinson .dpicker-invisible {
+  display: none; }
+
+#jonwilkinson .dpicker-visible {
+  display: block; }
+</style>
+  </head>
+  <body>
+    <h1>DPicker styles</h1>
+      <div class="style">
+        <h2>default</h2>
+        <div id="default">
+          <dpicker>
+          </dpicker>
+        </div>
+        <pre>td.dpicker-inactive {
+  color: grey;
+}
+
+button.dpicker-active {
+  background: coral;
+}
+
+.dpicker-invisible {
+  display: none;
+}
+.dpicker-visible {
+  display: block;
+}
+</pre>
+      </div>
+      <div class="style">
+        <h2>jonwilkinson</h2>
+        <div id="jonwilkinson">
+          <dpicker>
+          </dpicker>
+        </div>
+        <pre>.dpicker-container table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: 1px solid rgba(0,0,0,.05);
+    border-radius: 3px;
+    -webkit-box-shadow: 1px 1px 4px 0px rgba(0,0,0,0.5);
+    -moz-box-shadow: 1px 1px 4px 0px rgba(0,0,0,0.5);
+    box-shadow: 1px 1px 4px 0px rgba(0,0,0,0.5);
+}
+
+.dpicker-container button,
+.dpicker-container td,
+.dpicker-container th {
+    font-size: 1em;  /* overall calendar size */
+    height: 2em; /* tweak to add vertical spacing to calendar */
+    min-width: 1em; /* tweak to add horizontal spacing to calendar */
+    text-align: center;
+}
+
+.dpicker-inactive { color: rgba(0,0,0,.2); }
+select[name="dpicker-year"], select[name="dpicker-month"] { margin: 1em 2em 1em 0em; }
+.dpicker-active button.dpicker-active { background-color: #FFFBCC; font-weight:bold; }
+.dpicker-container, .dpicker-container button {  font-size: 100%; font: inherit; vertical-align: baseline; }
+.dpicker-container { margin:.5em; }
+.dpicker-active, .dpicker-inactive {border: 1px solid rgba(0,0,0,.05); }
+.dpicker-active button { border:none; width: 100%; background: none; }
+.dpicker-active button:hover { background: rgba(0,0,0,.05); cursor: pointer; }
+.dpicker-invisible { display: none; }
+.dpicker-visible { display: block; }
+</pre>
+      </div>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js">
+    </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/maquette/2.1.6/maquette.min.js">
+    </script>
+    <script type='text/javascript' src="../dist/dpicker.js">
+    </script>
+    <script>
+      ;[].slice.call(document.getElementsByTagName('dpicker')).forEach((e, i) => new DPicker(e))
+    </script>
+  </body>
+</html>
